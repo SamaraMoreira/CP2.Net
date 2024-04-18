@@ -1,5 +1,7 @@
 ﻿using CP2.Net.Data;
+using CP2.Net.DTOs;
 using CP2.Net.Models;
+using CP2.Net.Views.User;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,6 +19,11 @@ namespace CP2.Net.Controllers
             _logger = logger;
         }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult IndexLogin()
         {
             return View();
         }
@@ -39,6 +46,19 @@ namespace CP2.Net.Controllers
             _dataContext.Add(newUser);
             _dataContext.SaveChanges();
             return View();
+        }
+        public IActionResult Login(LoginDTO request)
+        {
+            var find = _dataContext.Usuarios.FirstOrDefault(x => x.Email == request.Email);
+            if (find == null)
+            {
+                return NotFound();
+            }
+            if (find.Password != request.Password)
+            {
+                return BadRequest("Senha inválida");
+            }
+            return View("Login", new LoginModel());
         }
 
 

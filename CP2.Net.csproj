@@ -19,11 +19,6 @@
 
   <ItemGroup>
     <Compile Remove="Models\User.cs" />
-    <Compile Remove="Views\User\Login.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Views\User\Login.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
